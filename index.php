@@ -7,11 +7,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
-       
-       
-    
 
-    <title>Challenge Php</title>
+
+
+
+    <title>Challenge Ajax</title>
     <link href="js/data.js" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Challenge Php</a>
+                <a class="navbar-brand" href="index.php">Challenge Ajax</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -155,7 +155,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="#"><i class="fa fa-fw fa-table"></i>Liste</a>
                     </li>
                 </ul>
             </div>
@@ -170,50 +170,61 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Tableau <small>Jeux Vidéos</small>
+                          Liste <small>de renseignements</small>
                         </h1>
                     </div>
-                    
+
                 </div>
-                    
+                <div id="affichage">
+      <select name="menu_destination" id="maliste" onchange="getid();">
+          <option value="0"></option>
+          <option value="1">Chameau</option>
+          <option value="2">Turlute</option>
+          <option value="3">Menvusa</option>
+          <option value="4">Kollick</option>
+          <option value="5">Meurtdesoif</option>
+          <option value="6">Oduvillage</option>
+       </select>
+       <p id="reponse"    style="margin-top: 20px;
+                                 margin-left: 20px;
+                                 background-color: black;
+                                 color: white;"
+></p>
+</div>
+
+
+<script type="text/javascript">
+var id = document.getElementById('maliste').value;
+  function getid(){
+    id = document.getElementById('maliste').value;
+    xhr = new XMLHttpRequest();
+    xhr.open("POST","traitement.php", true);
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState == 4 && xhr.status == 200){
+        document.getElementById('reponse').innerHTML = xhr.responseText;
+    }
+  }
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("id="+id);
+  }
+
+
+
+
+
+
+</script>
             </div>
             <!-- /.container-fluid -->
-            
-            <div>
-                <?php
-       $jeux = array('Halo','Need For Speed','GTA','Counter-Strike','Battlefield','Resistance');
-       
-            function ligneTableauxJeux($game) {
-                echo '<tr><td>'.$game.'</td></tr>';
-            };
-        ?>
-      <table id="gameTable" class="display" cellspacing="0" width="80%">
-       <thead><TR><TH>Jeux Vidéos</TH></TR></thead>
-          <tbody>
-       <?php
-                for($i=0;$i<count($jeux);$i++){
-                ligneTableauxJeux($jeux[$i]);
-                };
-        ?> 
-              </tbody>
-      </table>
-        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-       <script language="javascript">
-           $(document).ready(function() {
-        $('#gameTable').DataTable();
-        } );
-       </script>
-       
-            </div>
 
         </div>
         <!-- /#page-wrapper -->
-     
+
     </div>
     <!-- /#wrapper -->
    </header>
-         
+
     <!-- jQuery -->
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
